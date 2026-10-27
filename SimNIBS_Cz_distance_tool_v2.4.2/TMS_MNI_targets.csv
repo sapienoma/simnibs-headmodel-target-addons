@@ -1,0 +1,13 @@
+﻿ID,部位,MNI_X_mm,MNI_Y_mm,MNI_Z_mm,證據類型,來源,URL,備註
+DLPFC-L,左 DLPFC：SGC 連結群體參考,-38,44,26,MNI cortical target,Fox et al. 2012；Liu et al. 2023 記載,https://www.transcranial-brain-atlas.org/publications/Liu_Brain_Stimulation_2023.pdf,群體參考，不代表個人最佳治療靶點。
+DLPFC-LA,左前 DLPFC,-53,41,15,MNI cortical target,Liu et al. 2023（引述病灶／刺激網路定位）,https://www.transcranial-brain-atlas.org/publications/Liu_Brain_Stimulation_2023.pdf,與左後 DLPFC 不同，請依研究目的選擇。
+DLPFC-RA,右前 DLPFC,48,38,23,MNI cortical target,Liu et al. 2023,https://www.transcranial-brain-atlas.org/publications/Liu_Brain_Stimulation_2023.pdf,非左側座標鏡像。
+DLPFC-LP,左後 DLPFC,-46,9,31,MNI cortical target,Liu et al. 2023,https://www.transcranial-brain-atlas.org/publications/Liu_Brain_Stimulation_2023.pdf,研究用不同 DLPFC 子區。
+DLPFC-RP,右後 DLPFC,46,4,35,MNI cortical target,Liu et al. 2023,https://www.transcranial-brain-atlas.org/publications/Liu_Brain_Stimulation_2023.pdf,研究用不同 DLPFC 子區。
+SMA,SMA complex／pre-SMA 交界,0,6,66,MNI TMS study target,"Busan et al. 2019, Clinical Neurophysiology",https://arts.units.it/handle/11368/2931713,SMA complex 研究示例；不是所有 SMA 功能的通用中心。
+Broca-op,Broca：左 pars opercularis,-52,16,8,MNI mean TMS site,"Gough et al. 2005, Journal of Neuroscience",https://pmc.ncbi.nlm.nih.gov/articles/PMC1403818/,研究平均位置；Broca 並非單一點。
+Pars-tri,左 pars triangularis／IFG,-54,21,12,MNI TMS study target,"Whitney et al. 2011, Cerebral Cortex",https://academic.oup.com/cercor/article/21/5/1066/424312,語意控制研究；與 pars opercularis 區分。
+Wernicke-ROI,Wernicke／後顳語言區：影像 ROI 示例,-59,-35,-1,MNI imaging ROI (NOT validated universal TMS target),"Multimodal assessment of hemispheric lateralization for language, NeuroImage 2016",https://www.sciencedirect.com/science/article/abs/pii/S1053811916303962,原文將 Talairach 文獻座標轉為 MNI；不是通用 TMS 治療靶點，需依個人語言定位確認。
+Swallow-L,吞嚥相關左感覺運動區：fMRI 候選,-46,-10,36,MNI fMRI activation (NOT TMS hotspot),"Tongue Posture, Tongue Movements, Swallowing… Applied Sciences 2020, elevation-swallowing activation table",https://doi.org/10.3390/app10176027,吞嚥 hotspot 個體差異大，應以個人 TMS／MEP mapping 確認；此為影像候選。
+Swallow-R,吞嚥相關右感覺運動區：fMRI 候選,52,-8,26,MNI fMRI activation (NOT TMS hotspot),"Tongue Posture, Tongue Movements, Swallowing… Applied Sciences 2020, elevation-swallowing activation table",https://doi.org/10.3390/app10176027,吞嚥 hotspot 與優勢半球不可由此群體座標推定。
+IPL-L,左 inferior parietal lobule（IPL）,-40,-38,48,MNI TMS study target,Transcranial Magnetic Stimulation over the Left Inferior Parietal Lobule… Brain Sciences 2026,https://doi.org/10.3390/brainsci16050530,中英雙語閱讀研究用位點；不是整個 IPL 的通用中心。

@@ -1,0 +1,636 @@
+{
+  "note": "Historical internal development results; not new tests or Windows certification. Original locations retained as keys.",
+  "records": {
+    "VALIDATION.json": {
+      "version": {
+        "suite": "1.80.2",
+        "release": "hybrid-preserve-inferior-boundary-contacts",
+        "builder": "1.80.2",
+        "cz_distance_tool": "2.4.2",
+        "scalp_repair_gui": "1.80.2",
+        "release_date": "2026-10-19",
+        "requires": "Windows 10/11 / installed SimNIBS 4.6",
+        "languages": [
+          "zh-TW",
+          "en"
+        ]
+      },
+      "automated_tests": {
+        "builder_existing_and_integration": 30,
+        "hybrid_geometry": 20,
+        "hybrid_workflow_mock_official_EEG": 7,
+        "mask_repair_and_EEG_bridge": 16,
+        "target_geometry": 10,
+        "mesh_metrics": 2,
+        "Qt_scalp_switch_and_hybrid_launcher_native_objects_mocked": 10,
+        "total": 95,
+        "result": "passed"
+      },
+      "large_surface_geometry_stress_test": {
+        "scope": "Geometry stress test: same reviewed surface on both sides. Actual original m2m/donor pair and actual patient hybrid EEG were not supplied.",
+        "quality": {
+          "triangles": 292710,
+          "used_vertices": 146787,
+          "boundary_edges": 1122,
+          "minimum_triangle_area_mm2": 1.5892312890631666e-08,
+          "lower_ring_vertices": 1335,
+          "upper_ring_vertices": 1228,
+          "maximum_nearest_ring_gap_mm": 12.619765438384366,
+          "allowed_nearest_ring_gap_mm": 15.0,
+          "longest_seam_edge_mm": 12.619765438384366,
+          "maximum_source_ring_edge_mm": 1.288121091388798,
+          "boundary_correspondence": "ordered cyclic dynamic programming; squared physical edge cost; no source boundary resampling",
+          "original_vertices_unchanged": true,
+          "original_fully_retained_triangles": 245226,
+          "original_boundary_edges_preserved": 1122,
+          "seam_triangles": 2563,
+          "seam_attachment_open_edges": 0,
+          "seam_self_intersections": 0,
+          "seam_contact_exclusion_fraction": 0.0001,
+          "seam_SAT_tolerance_mm": 1e-09,
+          "seam_nonmanifold_vertices": 0,
+          "seam_vertices_checked": 2563,
+          "seam_candidate_pairs_tested": 22448,
+          "seam_intersection_scope": "annulus self-intersection; original/cap separated from seam interior by cutting planes; source surfaces still require anatomical review",
+          "source_original_triangles": 295134,
+          "donor_cap_triangles": 42918,
+          "lower_plane_h_mm": 113.25,
+          "upper_plane_h_mm": 117.25,
+          "normal_RAS": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "elapsed_seconds": 9.425,
+        "execution_note": "Carried forward from v1.80; not repeated for this hotfix."
+      },
+      "guarantees_checked": [
+        "Original vertex coordinates and fully retained lower triangle indices unchanged",
+        "Round-trip double coordinates in exported ASCII MSH",
+        "Seam attachment edges have exactly two incident triangles",
+        "Seam vertex fans are manifold and connected",
+        "Original neck/open boundaries preserved; no donor holes above seam",
+        "Seam SAT collision checks with documented contact exclusion tolerance",
+        "Official EEG command assembled for the final hybrid; mocked CLI verifies source/cap binding",
+        "Manual hybrid import checks manifest status and surface/CSV hashes",
+        "Original T1/m2m option remains selectable with matched EEG"
+      ],
+      "not_executed": [
+        "Windows-native OpenGL interaction",
+        "New Tk hybrid dialog rendered on Windows",
+        "Official EEG recomputation on this patient hybrid in a full SimNIBS installation",
+        "Whole source-surface global self-intersection screening",
+        "Volume FEM rebuilding or electromagnetic solve"
+      ],
+      "geometry_scope": "Superior surface replacement; original inferior boundary contacts preserved exactly under a distance/facial-neighborhood guard. No global manifold-repair claim. Original volume FEM unchanged.",
+      "current_regressions": [
+        "Existing inferior boundary contacts and all incident faces preserved exactly",
+        "Contacts near/above cut rejected",
+        "Near-boundary fiducials require identical original 10 mm patches",
+        "Changed patches and new-boundary Cz rejected",
+        "Mocked orchestration preserves original FEM and binds matching hybrid/EEG"
+      ],
+      "actual_uploaded_pair_test": {
+        "source": "Uploaded original FEM + previously reviewed donor, not identical-surface stress test",
+        "seam_triangles": 1283,
+        "open_seam_attachments": 0,
+        "seam_self_intersections": 0,
+        "seam_nonmanifold_vertices": 0,
+        "original_complete_faces_preserved": 57376,
+        "original_boundary_edges_preserved": 876,
+        "original_boundary_contacts_preserved": 6,
+        "EEG_points": 91,
+        "EEG_max_surface_residual_mm": 1.5888218580782548e-14,
+        "EEG_scope": "Stored SimNIBS EEG algorithm executed unchanged with a mesh-array adapter; native installed SimNIBS CLI not executed",
+        "native_Windows_CLI_executed": false
+      }
+    },
+    "PACKAGING_VALIDATION.json": {
+      "distribution_revision": 2,
+      "application_versions": {
+        "builder": "1.80.2",
+        "cz": "2.4.2"
+      },
+      "checks": {
+        "all_package_filenames_ASCII": true,
+        "old_Chinese_filenames_and_machine_specific_paths_absent": true,
+        "Python_3_11_syntax": true,
+        "per_user_preferences_tests_passed": 2,
+        "relocated_launcher_targets_with_spaces_resolve": [
+          "Start_Builder.vbs",
+          "Start_Cz_Tool.vbs",
+          "SimNIBS_Cz_distance_tool_v2.4.2/launch_hidden.vbs",
+          "SimNIBS_Cz_distance_tool_v2.4.2/Start_Cz_Tool.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/launch_hidden.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/Start_Builder.vbs",
+          "SimNIBS_Cz_distance_tool_v2.4.2/scalp_repair/Start_Scalp_Repair.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/scalp_repair/Start_Scalp_Repair.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/launch_hidden.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/Start_Cz_Tool.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/scalp_repair/Start_Scalp_Repair.vbs"
+        ],
+        "Getting_Started_local_README_links_resolve": true,
+        "scripts_ASCII_and_CRLF": true,
+        "production_executable_AST_unchanged_except_string_values": true,
+        "English_default_and_saved_language_verified": true,
+        "related_regression_tests_passed": 59
+      },
+      "not_executed": [
+        "Windows VBS / PowerShell execution; Windows runtime is unavailable here",
+        "Three unrelated remeshing/label tests require nibabel, unavailable in this packaging runtime.",
+        "Full native Qt GUI regression suite was not rerun; PyQt5 is unavailable in this runtime."
+      ],
+      "scientific_validation": "Calculation structure unchanged; diagnostic strings and initial language updated. Earlier full v1.80.2 validation is retained as historical validation."
+    },
+    "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/VALIDATION.json": {
+      "version": {
+        "suite": "1.80.2",
+        "release": "hybrid-preserve-inferior-boundary-contacts",
+        "builder": "1.80.2",
+        "cz_distance_tool": "2.4.2",
+        "scalp_repair_gui": "1.80.2",
+        "release_date": "2026-10-19",
+        "requires": "Windows 10/11 / installed SimNIBS 4.6",
+        "languages": [
+          "zh-TW",
+          "en"
+        ]
+      },
+      "automated_tests": {
+        "builder_existing_and_integration": 30,
+        "hybrid_geometry": 20,
+        "hybrid_workflow_mock_official_EEG": 7,
+        "mask_repair_and_EEG_bridge": 16,
+        "target_geometry": 10,
+        "mesh_metrics": 2,
+        "Qt_scalp_switch_and_hybrid_launcher_native_objects_mocked": 10,
+        "total": 95,
+        "result": "passed"
+      },
+      "large_surface_geometry_stress_test": {
+        "scope": "Geometry stress test: same reviewed surface on both sides. Actual original m2m/donor pair and actual patient hybrid EEG were not supplied.",
+        "quality": {
+          "triangles": 292710,
+          "used_vertices": 146787,
+          "boundary_edges": 1122,
+          "minimum_triangle_area_mm2": 1.5892312890631666e-08,
+          "lower_ring_vertices": 1335,
+          "upper_ring_vertices": 1228,
+          "maximum_nearest_ring_gap_mm": 12.619765438384366,
+          "allowed_nearest_ring_gap_mm": 15.0,
+          "longest_seam_edge_mm": 12.619765438384366,
+          "maximum_source_ring_edge_mm": 1.288121091388798,
+          "boundary_correspondence": "ordered cyclic dynamic programming; squared physical edge cost; no source boundary resampling",
+          "original_vertices_unchanged": true,
+          "original_fully_retained_triangles": 245226,
+          "original_boundary_edges_preserved": 1122,
+          "seam_triangles": 2563,
+          "seam_attachment_open_edges": 0,
+          "seam_self_intersections": 0,
+          "seam_contact_exclusion_fraction": 0.0001,
+          "seam_SAT_tolerance_mm": 1e-09,
+          "seam_nonmanifold_vertices": 0,
+          "seam_vertices_checked": 2563,
+          "seam_candidate_pairs_tested": 22448,
+          "seam_intersection_scope": "annulus self-intersection; original/cap separated from seam interior by cutting planes; source surfaces still require anatomical review",
+          "source_original_triangles": 295134,
+          "donor_cap_triangles": 42918,
+          "lower_plane_h_mm": 113.25,
+          "upper_plane_h_mm": 117.25,
+          "normal_RAS": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "elapsed_seconds": 9.425,
+        "execution_note": "Carried forward from v1.80; not repeated for this hotfix."
+      },
+      "guarantees_checked": [
+        "Original vertex coordinates and fully retained lower triangle indices unchanged",
+        "Round-trip double coordinates in exported ASCII MSH",
+        "Seam attachment edges have exactly two incident triangles",
+        "Seam vertex fans are manifold and connected",
+        "Original neck/open boundaries preserved; no donor holes above seam",
+        "Seam SAT collision checks with documented contact exclusion tolerance",
+        "Official EEG command assembled for the final hybrid; mocked CLI verifies source/cap binding",
+        "Manual hybrid import checks manifest status and surface/CSV hashes",
+        "Original T1/m2m option remains selectable with matched EEG"
+      ],
+      "not_executed": [
+        "Windows-native OpenGL interaction",
+        "New Tk hybrid dialog rendered on Windows",
+        "Official EEG recomputation on this patient hybrid in a full SimNIBS installation",
+        "Whole source-surface global self-intersection screening",
+        "Volume FEM rebuilding or electromagnetic solve"
+      ],
+      "geometry_scope": "Superior surface replacement; original inferior boundary contacts preserved exactly under a distance/facial-neighborhood guard. No global manifold-repair claim. Original volume FEM unchanged.",
+      "current_regressions": [
+        "Existing inferior boundary contacts and all incident faces preserved exactly",
+        "Contacts near/above cut rejected",
+        "Near-boundary fiducials require identical original 10 mm patches",
+        "Changed patches and new-boundary Cz rejected",
+        "Mocked orchestration preserves original FEM and binds matching hybrid/EEG"
+      ],
+      "actual_uploaded_pair_test": {
+        "source": "Uploaded original FEM + previously reviewed donor, not identical-surface stress test",
+        "seam_triangles": 1283,
+        "open_seam_attachments": 0,
+        "seam_self_intersections": 0,
+        "seam_nonmanifold_vertices": 0,
+        "original_complete_faces_preserved": 57376,
+        "original_boundary_edges_preserved": 876,
+        "original_boundary_contacts_preserved": 6,
+        "EEG_points": 91,
+        "EEG_max_surface_residual_mm": 1.5888218580782548e-14,
+        "EEG_scope": "Stored SimNIBS EEG algorithm executed unchanged with a mesh-array adapter; native installed SimNIBS CLI not executed",
+        "native_Windows_CLI_executed": false
+      }
+    },
+    "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/PACKAGING_VALIDATION.json": {
+      "distribution_revision": 2,
+      "application_versions": {
+        "builder": "1.80.2",
+        "cz": "2.4.2"
+      },
+      "checks": {
+        "all_package_filenames_ASCII": true,
+        "old_Chinese_filenames_and_machine_specific_paths_absent": true,
+        "Python_3_11_syntax": true,
+        "per_user_preferences_tests_passed": 2,
+        "relocated_launcher_targets_with_spaces_resolve": [
+          "Start_Builder.vbs",
+          "Start_Cz_Tool.vbs",
+          "SimNIBS_Cz_distance_tool_v2.4.2/launch_hidden.vbs",
+          "SimNIBS_Cz_distance_tool_v2.4.2/Start_Cz_Tool.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/launch_hidden.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/Start_Builder.vbs",
+          "SimNIBS_Cz_distance_tool_v2.4.2/scalp_repair/Start_Scalp_Repair.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/scalp_repair/Start_Scalp_Repair.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/launch_hidden.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/Start_Cz_Tool.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/scalp_repair/Start_Scalp_Repair.vbs"
+        ],
+        "Getting_Started_local_README_links_resolve": true,
+        "scripts_ASCII_and_CRLF": true,
+        "production_executable_AST_unchanged_except_string_values": true,
+        "English_default_and_saved_language_verified": true,
+        "related_regression_tests_passed": 59
+      },
+      "not_executed": [
+        "Windows VBS / PowerShell execution; Windows runtime is unavailable here",
+        "Three unrelated remeshing/label tests require nibabel, unavailable in this packaging runtime.",
+        "Full native Qt GUI regression suite was not rerun; PyQt5 is unavailable in this runtime."
+      ],
+      "scientific_validation": "Calculation structure unchanged; diagnostic strings and initial language updated. Earlier full v1.80.2 validation is retained as historical validation."
+    },
+    "SimNIBS_Cz_distance_tool_v2.4.2/VALIDATION.json": {
+      "version": {
+        "suite": "1.80.2",
+        "release": "hybrid-preserve-inferior-boundary-contacts",
+        "builder": "1.80.2",
+        "cz_distance_tool": "2.4.2",
+        "scalp_repair_gui": "1.80.2",
+        "release_date": "2026-10-19",
+        "requires": "Windows 10/11 / installed SimNIBS 4.6",
+        "languages": [
+          "zh-TW",
+          "en"
+        ]
+      },
+      "automated_tests": {
+        "builder_existing_and_integration": 30,
+        "hybrid_geometry": 20,
+        "hybrid_workflow_mock_official_EEG": 7,
+        "mask_repair_and_EEG_bridge": 16,
+        "target_geometry": 10,
+        "mesh_metrics": 2,
+        "Qt_scalp_switch_and_hybrid_launcher_native_objects_mocked": 10,
+        "total": 95,
+        "result": "passed"
+      },
+      "large_surface_geometry_stress_test": {
+        "scope": "Geometry stress test: same reviewed surface on both sides. Actual original m2m/donor pair and actual patient hybrid EEG were not supplied.",
+        "quality": {
+          "triangles": 292710,
+          "used_vertices": 146787,
+          "boundary_edges": 1122,
+          "minimum_triangle_area_mm2": 1.5892312890631666e-08,
+          "lower_ring_vertices": 1335,
+          "upper_ring_vertices": 1228,
+          "maximum_nearest_ring_gap_mm": 12.619765438384366,
+          "allowed_nearest_ring_gap_mm": 15.0,
+          "longest_seam_edge_mm": 12.619765438384366,
+          "maximum_source_ring_edge_mm": 1.288121091388798,
+          "boundary_correspondence": "ordered cyclic dynamic programming; squared physical edge cost; no source boundary resampling",
+          "original_vertices_unchanged": true,
+          "original_fully_retained_triangles": 245226,
+          "original_boundary_edges_preserved": 1122,
+          "seam_triangles": 2563,
+          "seam_attachment_open_edges": 0,
+          "seam_self_intersections": 0,
+          "seam_contact_exclusion_fraction": 0.0001,
+          "seam_SAT_tolerance_mm": 1e-09,
+          "seam_nonmanifold_vertices": 0,
+          "seam_vertices_checked": 2563,
+          "seam_candidate_pairs_tested": 22448,
+          "seam_intersection_scope": "annulus self-intersection; original/cap separated from seam interior by cutting planes; source surfaces still require anatomical review",
+          "source_original_triangles": 295134,
+          "donor_cap_triangles": 42918,
+          "lower_plane_h_mm": 113.25,
+          "upper_plane_h_mm": 117.25,
+          "normal_RAS": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "elapsed_seconds": 9.425,
+        "execution_note": "Carried forward from v1.80; not repeated for this hotfix."
+      },
+      "guarantees_checked": [
+        "Original vertex coordinates and fully retained lower triangle indices unchanged",
+        "Round-trip double coordinates in exported ASCII MSH",
+        "Seam attachment edges have exactly two incident triangles",
+        "Seam vertex fans are manifold and connected",
+        "Original neck/open boundaries preserved; no donor holes above seam",
+        "Seam SAT collision checks with documented contact exclusion tolerance",
+        "Official EEG command assembled for the final hybrid; mocked CLI verifies source/cap binding",
+        "Manual hybrid import checks manifest status and surface/CSV hashes",
+        "Original T1/m2m option remains selectable with matched EEG"
+      ],
+      "not_executed": [
+        "Windows-native OpenGL interaction",
+        "New Tk hybrid dialog rendered on Windows",
+        "Official EEG recomputation on this patient hybrid in a full SimNIBS installation",
+        "Whole source-surface global self-intersection screening",
+        "Volume FEM rebuilding or electromagnetic solve"
+      ],
+      "geometry_scope": "Superior surface replacement; original inferior boundary contacts preserved exactly under a distance/facial-neighborhood guard. No global manifold-repair claim. Original volume FEM unchanged.",
+      "current_regressions": [
+        "Existing inferior boundary contacts and all incident faces preserved exactly",
+        "Contacts near/above cut rejected",
+        "Near-boundary fiducials require identical original 10 mm patches",
+        "Changed patches and new-boundary Cz rejected",
+        "Mocked orchestration preserves original FEM and binds matching hybrid/EEG"
+      ],
+      "actual_uploaded_pair_test": {
+        "source": "Uploaded original FEM + previously reviewed donor, not identical-surface stress test",
+        "seam_triangles": 1283,
+        "open_seam_attachments": 0,
+        "seam_self_intersections": 0,
+        "seam_nonmanifold_vertices": 0,
+        "original_complete_faces_preserved": 57376,
+        "original_boundary_edges_preserved": 876,
+        "original_boundary_contacts_preserved": 6,
+        "EEG_points": 91,
+        "EEG_max_surface_residual_mm": 1.5888218580782548e-14,
+        "EEG_scope": "Stored SimNIBS EEG algorithm executed unchanged with a mesh-array adapter; native installed SimNIBS CLI not executed",
+        "native_Windows_CLI_executed": false
+      }
+    },
+    "SimNIBS_Cz_distance_tool_v2.4.2/PACKAGING_VALIDATION.json": {
+      "distribution_revision": 2,
+      "application_versions": {
+        "builder": "1.80.2",
+        "cz": "2.4.2"
+      },
+      "checks": {
+        "all_package_filenames_ASCII": true,
+        "old_Chinese_filenames_and_machine_specific_paths_absent": true,
+        "Python_3_11_syntax": true,
+        "per_user_preferences_tests_passed": 2,
+        "relocated_launcher_targets_with_spaces_resolve": [
+          "Start_Builder.vbs",
+          "Start_Cz_Tool.vbs",
+          "SimNIBS_Cz_distance_tool_v2.4.2/launch_hidden.vbs",
+          "SimNIBS_Cz_distance_tool_v2.4.2/Start_Cz_Tool.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/launch_hidden.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/Start_Builder.vbs",
+          "SimNIBS_Cz_distance_tool_v2.4.2/scalp_repair/Start_Scalp_Repair.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/scalp_repair/Start_Scalp_Repair.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/launch_hidden.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/Start_Cz_Tool.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/scalp_repair/Start_Scalp_Repair.vbs"
+        ],
+        "Getting_Started_local_README_links_resolve": true,
+        "scripts_ASCII_and_CRLF": true,
+        "production_executable_AST_unchanged_except_string_values": true,
+        "English_default_and_saved_language_verified": true,
+        "related_regression_tests_passed": 59
+      },
+      "not_executed": [
+        "Windows VBS / PowerShell execution; Windows runtime is unavailable here",
+        "Three unrelated remeshing/label tests require nibabel, unavailable in this packaging runtime.",
+        "Full native Qt GUI regression suite was not rerun; PyQt5 is unavailable in this runtime."
+      ],
+      "scientific_validation": "Calculation structure unchanged; diagnostic strings and initial language updated. Earlier full v1.80.2 validation is retained as historical validation."
+    },
+    "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/scalp_repair/VALIDATION.json": {
+      "version": "0.2",
+      "geometry_tests_passed": 5,
+      "case2_end_to_end_draft": true,
+      "QC_images_visually_reviewed": true,
+      "windows_GUI_tested": false,
+      "CHARM_run": false,
+      "clinical_accuracy_validated": false,
+      "eeg_bridge_tests_passed": 7,
+      "patient_eeg_recomputed": false,
+      "csv_parser_fix": "1.6.1",
+      "previous_actual_uploaded_EEG_csv_read": "passed; duplicate electrode/fiducial Iz resolved",
+      "surface_cleanup_version": "1.6.2",
+      "surface_cleanup_tests_passed": 4,
+      "actual_case_surface_cleanup": {
+        "opposite_pairs_cancelled": 2,
+        "faces_removed": 4,
+        "nonmanifold_edges_remaining": 0,
+        "vertices_moved": false
+      }
+    },
+    "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/VALIDATION.json": {
+      "version": {
+        "suite": "1.80.2",
+        "release": "hybrid-preserve-inferior-boundary-contacts",
+        "builder": "1.80.2",
+        "cz_distance_tool": "2.4.2",
+        "scalp_repair_gui": "1.80.2",
+        "release_date": "2026-10-19",
+        "requires": "Windows 10/11 / installed SimNIBS 4.6",
+        "languages": [
+          "zh-TW",
+          "en"
+        ]
+      },
+      "automated_tests": {
+        "builder_existing_and_integration": 30,
+        "hybrid_geometry": 20,
+        "hybrid_workflow_mock_official_EEG": 7,
+        "mask_repair_and_EEG_bridge": 16,
+        "target_geometry": 10,
+        "mesh_metrics": 2,
+        "Qt_scalp_switch_and_hybrid_launcher_native_objects_mocked": 10,
+        "total": 95,
+        "result": "passed"
+      },
+      "large_surface_geometry_stress_test": {
+        "scope": "Geometry stress test: same reviewed surface on both sides. Actual original m2m/donor pair and actual patient hybrid EEG were not supplied.",
+        "quality": {
+          "triangles": 292710,
+          "used_vertices": 146787,
+          "boundary_edges": 1122,
+          "minimum_triangle_area_mm2": 1.5892312890631666e-08,
+          "lower_ring_vertices": 1335,
+          "upper_ring_vertices": 1228,
+          "maximum_nearest_ring_gap_mm": 12.619765438384366,
+          "allowed_nearest_ring_gap_mm": 15.0,
+          "longest_seam_edge_mm": 12.619765438384366,
+          "maximum_source_ring_edge_mm": 1.288121091388798,
+          "boundary_correspondence": "ordered cyclic dynamic programming; squared physical edge cost; no source boundary resampling",
+          "original_vertices_unchanged": true,
+          "original_fully_retained_triangles": 245226,
+          "original_boundary_edges_preserved": 1122,
+          "seam_triangles": 2563,
+          "seam_attachment_open_edges": 0,
+          "seam_self_intersections": 0,
+          "seam_contact_exclusion_fraction": 0.0001,
+          "seam_SAT_tolerance_mm": 1e-09,
+          "seam_nonmanifold_vertices": 0,
+          "seam_vertices_checked": 2563,
+          "seam_candidate_pairs_tested": 22448,
+          "seam_intersection_scope": "annulus self-intersection; original/cap separated from seam interior by cutting planes; source surfaces still require anatomical review",
+          "source_original_triangles": 295134,
+          "donor_cap_triangles": 42918,
+          "lower_plane_h_mm": 113.25,
+          "upper_plane_h_mm": 117.25,
+          "normal_RAS": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "elapsed_seconds": 9.425,
+        "execution_note": "Carried forward from v1.80; not repeated for this hotfix."
+      },
+      "guarantees_checked": [
+        "Original vertex coordinates and fully retained lower triangle indices unchanged",
+        "Round-trip double coordinates in exported ASCII MSH",
+        "Seam attachment edges have exactly two incident triangles",
+        "Seam vertex fans are manifold and connected",
+        "Original neck/open boundaries preserved; no donor holes above seam",
+        "Seam SAT collision checks with documented contact exclusion tolerance",
+        "Official EEG command assembled for the final hybrid; mocked CLI verifies source/cap binding",
+        "Manual hybrid import checks manifest status and surface/CSV hashes",
+        "Original T1/m2m option remains selectable with matched EEG"
+      ],
+      "not_executed": [
+        "Windows-native OpenGL interaction",
+        "New Tk hybrid dialog rendered on Windows",
+        "Official EEG recomputation on this patient hybrid in a full SimNIBS installation",
+        "Whole source-surface global self-intersection screening",
+        "Volume FEM rebuilding or electromagnetic solve"
+      ],
+      "geometry_scope": "Superior surface replacement; original inferior boundary contacts preserved exactly under a distance/facial-neighborhood guard. No global manifold-repair claim. Original volume FEM unchanged.",
+      "current_regressions": [
+        "Existing inferior boundary contacts and all incident faces preserved exactly",
+        "Contacts near/above cut rejected",
+        "Near-boundary fiducials require identical original 10 mm patches",
+        "Changed patches and new-boundary Cz rejected",
+        "Mocked orchestration preserves original FEM and binds matching hybrid/EEG"
+      ],
+      "actual_uploaded_pair_test": {
+        "source": "Uploaded original FEM + previously reviewed donor, not identical-surface stress test",
+        "seam_triangles": 1283,
+        "open_seam_attachments": 0,
+        "seam_self_intersections": 0,
+        "seam_nonmanifold_vertices": 0,
+        "original_complete_faces_preserved": 57376,
+        "original_boundary_edges_preserved": 876,
+        "original_boundary_contacts_preserved": 6,
+        "EEG_points": 91,
+        "EEG_max_surface_residual_mm": 1.5888218580782548e-14,
+        "EEG_scope": "Stored SimNIBS EEG algorithm executed unchanged with a mesh-array adapter; native installed SimNIBS CLI not executed",
+        "native_Windows_CLI_executed": false
+      }
+    },
+    "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/PACKAGING_VALIDATION.json": {
+      "distribution_revision": 2,
+      "application_versions": {
+        "builder": "1.80.2",
+        "cz": "2.4.2"
+      },
+      "checks": {
+        "all_package_filenames_ASCII": true,
+        "old_Chinese_filenames_and_machine_specific_paths_absent": true,
+        "Python_3_11_syntax": true,
+        "per_user_preferences_tests_passed": 2,
+        "relocated_launcher_targets_with_spaces_resolve": [
+          "Start_Builder.vbs",
+          "Start_Cz_Tool.vbs",
+          "SimNIBS_Cz_distance_tool_v2.4.2/launch_hidden.vbs",
+          "SimNIBS_Cz_distance_tool_v2.4.2/Start_Cz_Tool.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/launch_hidden.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/Start_Builder.vbs",
+          "SimNIBS_Cz_distance_tool_v2.4.2/scalp_repair/Start_Scalp_Repair.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/scalp_repair/Start_Scalp_Repair.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/launch_hidden.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/Start_Cz_Tool.vbs",
+          "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/scalp_repair/Start_Scalp_Repair.vbs"
+        ],
+        "Getting_Started_local_README_links_resolve": true,
+        "scripts_ASCII_and_CRLF": true,
+        "production_executable_AST_unchanged_except_string_values": true,
+        "English_default_and_saved_language_verified": true,
+        "related_regression_tests_passed": 59
+      },
+      "not_executed": [
+        "Windows VBS / PowerShell execution; Windows runtime is unavailable here",
+        "Three unrelated remeshing/label tests require nibabel, unavailable in this packaging runtime.",
+        "Full native Qt GUI regression suite was not rerun; PyQt5 is unavailable in this runtime."
+      ],
+      "scientific_validation": "Calculation structure unchanged; diagnostic strings and initial language updated. Earlier full v1.80.2 validation is retained as historical validation."
+    },
+    "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/scalp_repair/VALIDATION.json": {
+      "version": "0.2",
+      "geometry_tests_passed": 5,
+      "case2_end_to_end_draft": true,
+      "QC_images_visually_reviewed": true,
+      "windows_GUI_tested": false,
+      "CHARM_run": false,
+      "clinical_accuracy_validated": false,
+      "eeg_bridge_tests_passed": 7,
+      "patient_eeg_recomputed": false,
+      "csv_parser_fix": "1.6.1",
+      "previous_actual_uploaded_EEG_csv_read": "passed; duplicate electrode/fiducial Iz resolved",
+      "surface_cleanup_version": "1.6.2",
+      "surface_cleanup_tests_passed": 4,
+      "actual_case_surface_cleanup": {
+        "opposite_pairs_cancelled": 2,
+        "faces_removed": 4,
+        "nonmanifold_edges_remaining": 0,
+        "vertices_moved": false
+      }
+    },
+    "SimNIBS_Cz_distance_tool_v2.4.2/scalp_repair/VALIDATION.json": {
+      "version": "0.2",
+      "geometry_tests_passed": 5,
+      "case2_end_to_end_draft": true,
+      "QC_images_visually_reviewed": true,
+      "windows_GUI_tested": false,
+      "CHARM_run": false,
+      "clinical_accuracy_validated": false,
+      "eeg_bridge_tests_passed": 7,
+      "patient_eeg_recomputed": false,
+      "csv_parser_fix": "1.6.1",
+      "previous_actual_uploaded_EEG_csv_read": "passed; duplicate electrode/fiducial Iz resolved",
+      "surface_cleanup_version": "1.6.2",
+      "surface_cleanup_tests_passed": 4,
+      "actual_case_surface_cleanup": {
+        "opposite_pairs_cancelled": 2,
+        "faces_removed": 4,
+        "nonmanifold_edges_remaining": 0,
+        "vertices_moved": false
+      }
+    }
+  }
+}

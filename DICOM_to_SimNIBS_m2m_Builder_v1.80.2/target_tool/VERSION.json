@@ -1,0 +1,18 @@
+{
+  "suite": "1.80.2",
+  "release": "hybrid-preserve-inferior-boundary-contacts",
+  "builder": "1.80.2",
+  "cz_distance_tool": "2.4.2",
+  "scalp_repair_gui": "1.80.2",
+  "release_date": "2026-10-19",
+  "requires": "Windows 10/11 / installed SimNIBS 4.6",
+  "languages": [
+    "zh-TW",
+    "en"
+  ],
+  "distribution_revision": 2,
+  "distribution_label": "English-first runtime logs and prompts",
+  "application_versions_unchanged": true,
+  "default_UI_language": "en",
+  "runtime_message_language": "en"
+}

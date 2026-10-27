@@ -1,0 +1,25 @@
+{
+  "suite": "1.80.2",
+  "release": "hybrid-preserve-inferior-boundary-contacts",
+  "builder": "1.80.2",
+  "cz_distance_tool": "2.4.2",
+  "scalp_repair_gui": "1.80.2",
+  "release_date": "2026-10-27",
+  "requires": "Windows 10/11 / installed SimNIBS 4.6",
+  "languages": [
+    "zh-TW",
+    "en"
+  ],
+  "application_versions_unchanged": true,
+  "default_UI_language": "en",
+  "runtime_message_language": "en",
+  "distribution_date": "2026-10-27",
+  "publication_status": "release_candidate_windows_acceptance_pending",
+  "license": "GPL-3.0-only",
+  "project": "simnibs-headmodel-target-addons",
+  "version": "1.0.0-rc.1",
+  "public_release": "1.0.0-rc.1",
+  "tag": "v1.0.0-rc.1",
+  "internal_suite": "1.80.2",
+  "internal_distribution_revision": 4
+}

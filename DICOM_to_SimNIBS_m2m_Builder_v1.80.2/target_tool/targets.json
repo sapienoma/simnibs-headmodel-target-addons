@@ -1,0 +1,170 @@
+[
+  {
+    "id": "DLPFC-L",
+    "name": "左 DLPFC：SGC 連結群體參考",
+    "mni": [
+      -38,
+      44,
+      26
+    ],
+    "space": "MNI (mm, RAS)",
+    "evidence_type": "MNI cortical target",
+    "source": "Fox et al. 2012；Liu et al. 2023 記載",
+    "url": "https://www.transcranial-brain-atlas.org/publications/Liu_Brain_Stimulation_2023.pdf",
+    "note": "群體參考，不代表個人最佳治療靶點。"
+  },
+  {
+    "id": "DLPFC-LA",
+    "name": "左前 DLPFC",
+    "mni": [
+      -53,
+      41,
+      15
+    ],
+    "space": "MNI (mm, RAS)",
+    "evidence_type": "MNI cortical target",
+    "source": "Liu et al. 2023（引述病灶／刺激網路定位）",
+    "url": "https://www.transcranial-brain-atlas.org/publications/Liu_Brain_Stimulation_2023.pdf",
+    "note": "與左後 DLPFC 不同，請依研究目的選擇。"
+  },
+  {
+    "id": "DLPFC-RA",
+    "name": "右前 DLPFC",
+    "mni": [
+      48,
+      38,
+      23
+    ],
+    "space": "MNI (mm, RAS)",
+    "evidence_type": "MNI cortical target",
+    "source": "Liu et al. 2023",
+    "url": "https://www.transcranial-brain-atlas.org/publications/Liu_Brain_Stimulation_2023.pdf",
+    "note": "非左側座標鏡像。"
+  },
+  {
+    "id": "DLPFC-LP",
+    "name": "左後 DLPFC",
+    "mni": [
+      -46,
+      9,
+      31
+    ],
+    "space": "MNI (mm, RAS)",
+    "evidence_type": "MNI cortical target",
+    "source": "Liu et al. 2023",
+    "url": "https://www.transcranial-brain-atlas.org/publications/Liu_Brain_Stimulation_2023.pdf",
+    "note": "研究用不同 DLPFC 子區。"
+  },
+  {
+    "id": "DLPFC-RP",
+    "name": "右後 DLPFC",
+    "mni": [
+      46,
+      4,
+      35
+    ],
+    "space": "MNI (mm, RAS)",
+    "evidence_type": "MNI cortical target",
+    "source": "Liu et al. 2023",
+    "url": "https://www.transcranial-brain-atlas.org/publications/Liu_Brain_Stimulation_2023.pdf",
+    "note": "研究用不同 DLPFC 子區。"
+  },
+  {
+    "id": "SMA",
+    "name": "SMA complex／pre-SMA 交界",
+    "mni": [
+      0,
+      6,
+      66
+    ],
+    "space": "MNI (mm, RAS)",
+    "evidence_type": "MNI TMS study target",
+    "source": "Busan et al. 2019, Clinical Neurophysiology",
+    "url": "https://arts.units.it/handle/11368/2931713",
+    "note": "SMA complex 研究示例；不是所有 SMA 功能的通用中心。"
+  },
+  {
+    "id": "Broca-op",
+    "name": "Broca：左 pars opercularis",
+    "mni": [
+      -52,
+      16,
+      8
+    ],
+    "space": "MNI (mm, RAS)",
+    "evidence_type": "MNI mean TMS site",
+    "source": "Gough et al. 2005, Journal of Neuroscience",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1403818/",
+    "note": "研究平均位置；Broca 並非單一點。"
+  },
+  {
+    "id": "Pars-tri",
+    "name": "左 pars triangularis／IFG",
+    "mni": [
+      -54,
+      21,
+      12
+    ],
+    "space": "MNI (mm, RAS)",
+    "evidence_type": "MNI TMS study target",
+    "source": "Whitney et al. 2011, Cerebral Cortex",
+    "url": "https://academic.oup.com/cercor/article/21/5/1066/424312",
+    "note": "語意控制研究；與 pars opercularis 區分。"
+  },
+  {
+    "id": "Wernicke-ROI",
+    "name": "Wernicke／後顳語言區：影像 ROI 示例",
+    "mni": [
+      -59,
+      -35,
+      -1
+    ],
+    "space": "MNI (mm, RAS)",
+    "evidence_type": "MNI imaging ROI (NOT validated universal TMS target)",
+    "source": "Multimodal assessment of hemispheric lateralization for language, NeuroImage 2016",
+    "url": "https://www.sciencedirect.com/science/article/abs/pii/S1053811916303962",
+    "note": "原文將 Talairach 文獻座標轉為 MNI；不是通用 TMS 治療靶點，需依個人語言定位確認。"
+  },
+  {
+    "id": "Swallow-L",
+    "name": "吞嚥相關左感覺運動區：fMRI 候選",
+    "mni": [
+      -46,
+      -10,
+      36
+    ],
+    "space": "MNI (mm, RAS)",
+    "evidence_type": "MNI fMRI activation (NOT TMS hotspot)",
+    "source": "Tongue Posture, Tongue Movements, Swallowing… Applied Sciences 2020, elevation-swallowing activation table",
+    "url": "https://doi.org/10.3390/app10176027",
+    "note": "吞嚥 hotspot 個體差異大，應以個人 TMS／MEP mapping 確認；此為影像候選。"
+  },
+  {
+    "id": "Swallow-R",
+    "name": "吞嚥相關右感覺運動區：fMRI 候選",
+    "mni": [
+      52,
+      -8,
+      26
+    ],
+    "space": "MNI (mm, RAS)",
+    "evidence_type": "MNI fMRI activation (NOT TMS hotspot)",
+    "source": "Tongue Posture, Tongue Movements, Swallowing… Applied Sciences 2020, elevation-swallowing activation table",
+    "url": "https://doi.org/10.3390/app10176027",
+    "note": "吞嚥 hotspot 與優勢半球不可由此群體座標推定。"
+  },
+  {
+    "id": "IPL-L",
+    "name": "左 inferior parietal lobule（IPL）",
+    "mni": [
+      -40,
+      -38,
+      48
+    ],
+    "space": "MNI (mm, RAS)",
+    "evidence_type": "MNI TMS study target",
+    "source": "Transcranial Magnetic Stimulation over the Left Inferior Parietal Lobule… Brain Sciences 2026",
+    "url": "https://doi.org/10.3390/brainsci16050530",
+    "note": "中英雙語閱讀研究用位點；不是整個 IPL 的通用中心。"
+  }
+]

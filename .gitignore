@@ -1,0 +1,33 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+simnibs_env/
+# Local secrets/preferences/logs
+.env
+.env.*
+!.env.example
+settings.json
+*.log
+# Case data and reconstruction outputs (never keep under source)
+DICOM/
+NIfTI/
+Projects/
+data/
+m2m_*/
+repair_assets/
+*.dcm
+*.ima
+*.nii
+*.nii.gz
+*.msh
+*.ply
+*.stl
+EEG10-10*.csv
+# Program catalogs targets.json and TMS_MNI_targets.csv are intentionally retained.
+# Release archives belong in Releases
+*.zip
+.DS_Store
+Thumbs.db

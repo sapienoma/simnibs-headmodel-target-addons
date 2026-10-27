@@ -1,0 +1,103 @@
+
+
+SimNIBS Tools Suite v1.80.2 — hybrid scalp edition
+Builder v1.80.2 / Cz tool v2.4.2 (hybrid interface v1.80.2)
+Windows 10/11; installed SimNIBS 4.6 required. Chinese: README.txt.
+
+WHAT CHANGED
+Final localization scalp = original m2m lower scalp + local transition strip + reviewed donor superior cap.
+The final model no longer replaces the entire original scalp with a union-grid reconstruction.
+Original vertex coordinates and fully retained lower triangles remain unchanged. Only triangles crossing the
+lower cut are clipped. Face/ear/lateral scalp detail is retained below the selected cut. The seam is C0 connected,
+not globally smoothed; smooth curvature and anatomical accuracy still require visual review.
+The original volume FEM, cortex, MRI and default EEG CSV are retained.
+
+USE EXISTING REVIEWED WORK (NO DICOM OR REGISTRATION RERUN)
+1. Extract the whole archive. Open Start_Cz_Tool.vbs, load the original m2m and select Create hybrid scalp.
+2. In the repair window, Load previous work and select repair_...\manifest.json.
+3. If REVIEWED export is complete, select ⑤ Build hybrid scalp + recompute EEG. Otherwise review/export first.
+4. Select the original full head FEM .msh in m2m; do not select a scalp-only MSH as the original.
+   Select scalp_surface_REVIEWED_RAS.ply, or its paired scalp_surface_ONLY.msh, as the donor.
+   A PLY differing from the reviewed manifest is rejected. Existing Builder state also checks the source T1 hash.
+5. Fiducials default to original m2m\eeg_positions\EEG10-10_UI_Jurak_2007.csv when available.
+   Verify anatomical Nz/Iz/LPA/RPA in scanner RAS mm; manually corrected CSV is accepted.
+   LPA/RPA are preauricular landmarks. Do not use MNI, LPS or voxel indices. Old donor-surface EEG is not the final hybrid cap.
+6. Leave lower-cut RAS Z blank to start about 8 mm below the original T1 superior FOV / scalp maximum.
+   If necessary, automatic search tries up to another 12 mm downward in the superior region, recording every attempt.
+   A manual RAS Z specifies a horizontal world-RAS plane and is never automatically shifted.
+   Transition height defaults to 4 mm (range 0.5–15 mm). Missing coverage or unsuitable cuts cause failure.
+7. Confirm subject, sources and fiducial anatomy, then Build hybrid, check seam and recompute EEG.
+   The default add-to-m2m option creates companion assets only, retaining the volume FEM.
+8. Review hybrid_report.html and hybrid_preview.png. Load hybrid_scalp_ONLY.msh plus hybrid_seam.geo
+   in Gmsh to inspect the exact seam. Blue: original; green: donor cap; orange: newly triangulated seam.
+9. Review recomputed EEG CSV/GEO, Cz and coordinate changes. Reopen the original m2m in the companion GUI,
+   then select Hybrid scalp + recomputed EEG. Original T1/m2m scalp + original EEG remains available.
+
+NEW DICOM / MASK WORK
+Defaults: C:\SimNIBS_Data\DICOM, C:\SimNIBS_Data\Projects and C:\dcm2niix.exe. Paths and Python are remembered.
+Uses SimNIBS Python, preferring SIMNIBS_PYTHON, saved path, Program Files\SimNIBS-4.6, C:\SimNIBS-4.6, then manual choice.
+Convert DICOM, choose T1 and optionally conventional T2, verify subject/coverage, build and review the segmentation report.
+Explicit T1 FLAIR is allowed with quality checks. T2 FLAIR/DWI/ADC/screenshots are not conventional T1/T2 inputs.
+A valid qform can be preferred using --forceqform without modifying source NIfTI. CHARM stages can resume from pipeline_state.json.
+The repair tool still uses a union grid for registration/envelope review; the final hybrid does not replace the whole scalp with it.
+Open T1_union.nii.gz, T2_registered_union.nii.gz and scalp_envelope_DRAFT.nii.gz in ITK-SNAP / 3D Slicer.
+Edit a filled 0/1 head-envelope labelmap only where MRI supports it. Keep union-grid shape/spacing/origin/direction/affine.
+Save a separate EDITED NIfTI, confirm review, then Load manually edited mask and export to create REVIEWED NIfTI/PLY/hashes.
+The envelope is not a thin scalp compartment or a multi-tissue FEM segmentation.
+Whole repaired surface EEG (legacy) remains optional; the hybrid workflow is now primary.
+
+SEAM CHECKS
+Two parallel cuts produce closed lower/upper rings. Original boundary vertices are not resampled or moved.
+Ordered cyclic dynamic programming uses physical edge costs to join different ring sample counts.
+Every attachment edge must have exactly two incident faces. Checks cover winding, zero-area/duplicate triangles,
+non-manifold edges and seam vertex fans, preservation of original neck/open boundaries, and seam self-intersection.
+The donor cap must have no extra open boundary above its cut. Original and cap interiors occupy half-spaces outside
+the seam slab. Source surfaces are not globally screened for self-intersection; their anatomy still requires review.
+Collision checks exclude expected shared edge/vertex contact using documented numerical tolerances in seam_quality.
+Disconnected original scalp, multiple cut loops, excessive ring separation, missing cap coverage or seam intersections stop the job.
+Fully retained original triangles/coordinates are checked unchanged; 17 significant digits round-trip doubles in the output.
+After geometry checks, fiducials must project within 5 mm and avoid acquisition boundaries. Official SimNIBS EEG is recomputed
+on the hybrid; every new cap point must lie within 3 mm of the surface. Thresholds are software checks, not clinical accuracy claims.
+Duplicate fiducial names use Fiducial priority; same-priority conflicting coordinates require correction.
+A >5 mm landmark mismatch requires review on MRI, not simply relaxing the threshold. A nearest projection is only a candidate.
+
+OUTPUT
+hybrid_...\ contains hybrid_scalp_ONLY.msh (tag 1005, no tetrahedra), hybrid_seam.geo, hybrid_preview.png (if matplotlib is
+available), hybrid_report.html, hybrid_manifest.json, EEG10-10_hybrid.csv/.geo and EEG_coordinate_changes.csv.
+Coordinate changes are Euclidean displacement, not scalp arc length.
+Success: COMPUTED_REQUIRES_VISUAL_REVIEW. FAILED_DO_NOT_USE candidates must not be used.
+Adding to the original m2m writes repair_assets\import_... and repair_binding.json, retaining the original FEM/cap and previous repair work.
+
+SWITCHING AND SIMULATION SCOPE
+Original T1/m2m scalp + original EEG remains available. A hybrid binding displays Hybrid scalp + recomputed EEG;
+legacy full-surface bindings display Repaired scalp + new EEG. Switching clears Current Position, paths and results.
+Per-m2m mode is remembered; standalone launch remains blank. Recheck existing TMS table positions after switching.
+Mesh triangle count / mean edge length describe sampling, not MRI anatomical resolution.
+Hybrid scalp supports display, Cz tape distances, TMS placement and normals. Fields still solve in the original volume FEM.
+Updating conductive geometry requires edited multi-tissue labels and remeshing; a surface does not invent skull/CSF.
+The Builder edited-label FEM workflow remains available for the original label_prep grid and existing tissue IDs.
+TES electrodes remain unsupported in repaired/hybrid overlay mode; use a consistent volume mesh.
+Ordinary SimNIBS does not read repair_binding.json: launch the companion. See target_tool\README_EN.txt for MNI and tape methods.
+
+STARTUP AND VALIDATION
+launch_hidden.vbs / Start_Cz_Tool.vbs hides CMD; start_cz_tool.bat is for troubleshooting.
+Startup log: %TEMP%\SimNIBS_HeadBuilder_startup.log. Repair log: %LOCALAPPDATA%\SimNIBS_ScalpRepair\last_run.log.
+Chinese/English UI available; third-party logs retain original language. Archive excludes SimNIBS, dcm2niix, weights and MRI.
+See VALIDATION.json for unit tests and the large-surface seam stress test. Native Windows/OpenGL, full CHARM/field solving
+and a clinical validation of this subject's actual original FEM/donor pair were not executed here.
+
+v1.80.2: tested with the actual uploaded reference case original FEM and reviewed donor
+Six original tag-1005 boundary contacts have degree four, 108–130 mm below the selected cut.
+Allow existing contacts at least 10 mm below the cut only when their coordinates, complete incident-face stars
+and every original boundary edge are preserved exactly. No filling, welding or vertex movement is applied.
+Non-manifold edges, duplicate/degenerate faces, disconnected sources and contacts near/above the cut remain rejected.
+Original LPA/RPA are about 3 mm from existing boundaries. A fiducial exception requires an identical original
+10 mm triangle patch and projection onto the original surface. New/changed boundaries and Cz never receive this exception.
+This is a locally verified hybrid, not a claim that the full source scalp has become globally manifold.
+Actual-pair test: 1,283 seam triangles, zero open seam attachments, zero seam self-intersections and zero non-manifold seam vertices.
+57,376 original whole lower faces and all 876 original boundary edges were preserved.
+The stored SimNIBS EEG algorithm produced 91 positions through a mesh-array adapter; native Windows CLI remains untested.
+Reload reviewed manifest, leave cut blank, use 4 mm width and a NEW empty output folder, then run step 5.
+No conversion/registration/mask rerun is needed. Automatic h=126.7683566815 is an oblique-plane offset, NOT manual RAS Z.
+Diagnostics remain in topology_diagnostics.json, topology_boundary_vertices.csv and hybrid_manifest.json.
+Original volume FEM, original/hybrid switching and bilingual UI are retained.

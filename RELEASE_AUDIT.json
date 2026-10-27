@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-27",
+  "suite": "1.80.2",
+  "distribution_revision": 4,
+  "source_distribution_revision": 3,
+  "application_versions": {
+    "builder": "1.80.2",
+    "cz": "2.4.2"
+  },
+  "checks": {
+    "supplied_license_byte_identical": true,
+    "source_script_headers_added": 76,
+    "python_AST_unchanged_files": 56,
+    "script_body_unchanged": true
+  },
+  "limits": [
+    "Pattern/extension scan is not proof that all possible personal data or secrets are absent.",
+    "Historical code authorship and exact dependency licensing require maintainer review.",
+    "Native Windows VBS/PowerShell/Qt and full CHARM/FEM/EEG integration were not executed in this Linux environment.",
+    "Historical VALIDATION.json and PACKAGING_VALIDATION.json results were not fully rerun."
+  ],
+  "remaining": [
+    "Record clean-machine Windows acceptance.",
+    "Retain/review historical third-party provenance and notices."
+  ],
+  "status": "windows_acceptance_pending",
+  "license": "GPL-3.0-only",
+  "prior_revision_3_checks": {
+    "original_zip_crc": "pass",
+    "unchanged_executable_files": 76,
+    "python_3_11_syntax_files": 56,
+    "unit_tests_this_run": {
+      "command": "python3 -m unittest test_core test_preferences",
+      "passed": 10
+    },
+    "all_filenames_ascii": true,
+    "markdown_local_links_broken": [],
+    "limited_sensitive_text_scan_findings": [],
+    "csv_files": [
+      "DICOM_to_SimNIBS_m2m_Builder_v1.80.2/target_tool/TMS_MNI_targets.csv",
+      "SimNIBS_Cz_distance_tool_v2.4.2/TMS_MNI_targets.csv"
+    ],
+    "patient_image_mesh_or_binary_files_found": []
+  },
+  "public_version": "1.0.0-rc.1",
+  "project": "simnibs-headmodel-target-addons",
+  "source_package": "internal Suite 1.80.2 dist4",
+  "public_packaging_checks": {
+    "executable_files_unchanged_from_dist4": true,
+    "historical_validation_files_consolidated": 11,
+    "patient_data_binary_extension_scan": "none found",
+    "scope": "Static package checks; not Windows runtime acceptance"
+  }
+}

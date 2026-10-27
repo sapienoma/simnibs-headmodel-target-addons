@@ -1,0 +1,119 @@
+
+
+SimNIBS Tools Suite v1.80.2 — 混合頭皮版
+Builder v1.80.2 / Cz tool v2.4.2（混合頭皮介面 v1.80.2）
+Windows 10/11、已安裝 SimNIBS 4.6；英文說明 README_EN.txt。
+
+本版修補方式
+最終定位表面 = 原 m2m 下方頭皮 + 局部接縫 + 已檢查的頭頂補片。
+不再以共同體素網格重新三角化整個頭皮作為最終修補結果。
+裁切線以下的原始頂點及完全位於保留區的三角面保持不變；穿過裁切線的三角面只在局部裁切。
+原 m2m 的臉、耳周與側頭部網格保留；頭頂使用補頂表面，兩圈邊界以共用頂點及新三角面連接。
+這是 C0 連續的三角表面接合，沒有全頭平滑，也不保證接縫曲率完全平滑；完成後仍須目視檢查。
+原始四面體 FEM、皮質、MRI 與標準 EEG CSV 不改寫。
+
+已有修補草稿／REVIEWED 表面的操作（不用重跑 DICOM 或配準）
+1. 完整解壓縮 ZIP。開 Start_Cz_Tool.vbs，載入原 m2m，按「建立混合頭皮…」。
+   或在 Cz 工具載入原始 m2m 後，按「建立混合頭皮…」。
+2. 補頂子視窗按「載入先前工作」，選 repair_...\manifest.json。
+3. 已完成人工檢查與 REVIEWED 匯出者，直接按「⑤ 建立混合頭皮＋重算 EEG…」。
+   尚未完成者先依下節檢查與匯出，不要將未檢查的 DRAFT 當成補頂依據。
+4. 選原始 m2m 的完整頭部 FEM .msh；不要選 scalp_surface_ONLY.msh 當原始模型。
+   補頂來源選 scalp_surface_REVIEWED_RAS.ply，或同次重算得到的 scalp_surface_ONLY.msh。
+   PLY 若與 manifest 的已檢查雜湊不同會停止。若來源有 Builder pipeline_state，亦檢查 T1 來源雜湊。
+5. 四基準點預設使用原 m2m\eeg_positions\EEG10-10_UI_Jurak_2007.csv（若存在）。
+   確認 Nz、Iz、LPA、RPA 解剖位置正確，使用 scanner RAS mm；可選人工修正 CSV。
+   LPA/RPA 是耳前點；不能使用 MNI、LPS 或 voxel index。舊修補表面的 EEG 不能當成最終混合 EEG 直接沿用。
+6. 「原始保留上界 RAS Z」留白：參考原 T1 的上界與原頭皮上界，下移約 8 mm。
+   若該切面無法接合，程式只在頭頂區再向下最多 12 mm 嘗試，將每次嘗試寫入 manifest。
+   手動填值則使用世界 RAS Z 的水平切面，不會自動改變你指定的高度。
+   預設接縫高度 4 mm，可設 0.5–15 mm。位置不適合或頭頂涵蓋不足時停止，需調整高度／遮罩。
+7. 勾選同個案、來源與基準點確認，按「建立混合表面、測試接縫並重算 EEG」。
+   預設「完成後加入原 m2m 的混合／原始頭皮切換選項」：只新增 companion 配對資料，FEM 保留。
+8. 開啟 hybrid_report.html、hybrid_preview.png，並在 Gmsh 載入 hybrid_scalp_ONLY.msh 與
+   hybrid_seam.geo，檢查精確接縫。預覽以藍色原始、綠色補片、橙色接縫顯示。
+9. 檢查重算 EEG CSV/GEO、Cz 與變動表，再重新開啟原始 m2m，在「頭皮模型」選單選混合模型。
+   原始 T1／m2m 頭皮選項仍保留，兩種選項的 EEG 會一起切換。
+
+新的 DICOM／MRI 工作
+預設 DICOM C:\SimNIBS_Data\DICOM；輸出 C:\SimNIBS_Data\Projects；dcm2niix C:\dcm2niix.exe。
+使用 SimNIBS 內附 Python；優先 SIMNIBS_PYTHON、前次設定、C:\Program Files\SimNIBS-4.6，
+其次 C:\SimNIBS-4.6，再手動選擇。Python／DICOM／輸出／dcm2niix 路徑會記住。
+主視窗 DICOM 轉檔 → 選 T1 與可選 T2 → 核對同個案與涵蓋範圍 → 建立 m2m。
+明確的 T1 FLAIR 可選，需檢查品質；T2 FLAIR、DWI、ADC、截圖不當作一般 T1/T2。
+qform/sform 不符時可採有效 qform（--forceqform），不修改原始 NIfTI。
+分割／皮質表面／FEM 分階段續跑；pipeline_state.json 記錄輸入與狀態。完成提醒含本次耗時。
+開啟 results.html / charm_report.html 檢查組織邊界與方向後，再進行補頂。
+
+人工遮罩檢查與匯出
+在補頂子視窗安裝首次獨立依賴，選 T1/T2 配準與產生草稿。這一步仍建立共同網格供對位與遮罩檢查，
+但最終混合模型不會把共同網格重建的整個頭皮拿來替換原 m2m。
+在 ITK-SNAP / 3D Slicer 開 T1_union.nii.gz、T2_registered_union.nii.gz 及
+scalp_envelope_DRAFT.nii.gz。此遮罩是填滿頭部的 0/1 外輪廓，不是薄層 scalp 組織。
+逐切面檢查配準、頭頂、接縫及涵蓋，只修改有 MRI 支持的外輪廓。
+另存 scalp_envelope_EDITED.nii.gz，保持 union-grid 尺寸、方向、原點、spacing、affine 不變。
+回工具確認檢查，按「載入人工修正遮罩並匯出」，產生 REVIEWED NIfTI、PLY 與配對雜湊。
+完全接受草稿可按「匯出已檢查草稿表面」。之後使用新的混合流程建立最終頭皮及 EEG。
+「完整修補表面 EEG（舊流程）」仍可選用，但不是預設的混合模型流程。
+
+接縫檢查與停止條件
+- 兩個平行裁切面形成上下兩個閉合邊界環；保留原始點，不重採樣邊界。
+- 以循環順序與實際空間距離的動態規劃連接不同點數的兩環。
+- 接縫附著邊恰由兩個三角面共用；檢查法向繞序、零面積面、重複面、非流形邊／接縫頂點扇。
+- 原始頸部／採集開口邊界必須保持一致；補頂區不允許額外孔洞。
+- 檢查接縫內部自交。原始與補片分別在接縫帶下／上方，其內部不會穿入接縫帶。
+- 自交檢查有數值容差，會排除合法的共邊／共點接觸；詳見 seam_quality。沒有宣稱驗證來源整個表面的自交。
+- 多個切面環、分離原始頭皮、缺失補頂涵蓋、配準差或接縫自交時停止，不強行封口或焊接。
+- 所有完整保留三角面與原始頂點座標均有不變性檢查；輸出 17 位有效數字保留雙精度座標。
+- 幾何通過後，四基準點投影距離需 <=5 mm 且遠離開口（完全保留的原始基準點局部網格例外見下文），呼叫 SimNIBS 官方 EEG 重算。
+  新 EEG 每點到混合表面需 <=3 mm；不會只重用舊 Cz。
+以上門檻為程式檢查設定，不是臨床定位精準度標準；解剖與切面仍需人工確認。
+
+輸出
+hybrid_日期時間\
+  hybrid_scalp_ONLY.msh       最終混合定位表面（tag 1005；無四面體）
+  hybrid_seam.geo             上下接縫精確邊界
+  hybrid_preview.png          全部可見三角面的正投影彩色預覽（若 matplotlib 可用）
+  hybrid_report.html          接縫檢查報告
+  hybrid_manifest.json        來源雜湊、切面嘗試、幾何檢查、EEG 狀態
+  EEG10-10_hybrid.csv / .geo  混合表面重算 EEG
+  EEG_coordinate_changes.csv  新舊座標的直線位移（不是頭皮弧長）
+成功狀態 COMPUTED_REQUIRES_VISUAL_REVIEW；FAILED_DO_NOT_USE 的候選不可使用。
+選擇加入原 m2m 後，repair_assets\import_... 另存混合表面與正規化 EEG，repair_binding.json 保留對應。
+原始 .msh、原始 cap 與舊修補工作不覆寫。
+
+原始／混合模型切換與模擬範圍
+Cz 面板保留「原始 T1／m2m 頭皮＋原始 EEG」；混合配對載入後第二項顯示「混合頭皮＋重算 EEG」。
+既有完整修補表面配對仍顯示「修補頭皮＋新 EEG」，保留相容性。
+切換會清除 Current Position、測量與路徑；需重新計算。每個 m2m 記住模式，獨立啟動仍空白。
+面板顯示網格三角面數與平均邊長；這不是 MRI 原始解剖解析度。既有 TMS 表格點位須重新核對。
+混合表面用於顯示、Cz 弧長測距、TMS 定位與法向；求解仍用原始體積 FEM。
+若要補回導電組織，須修正多組織標籤並重建 FEM；只有表面不會補出顱骨／CSF。
+Builder 的「從人工修正組織標籤重建 FEM…」保留，僅接受原 label_prep 網格與既有組織 ID。
+混合／修補定位覆蓋模式的 TES 電極 session 仍不支援；必須使用一致的體積網格。
+普通 SimNIBS 不會自行讀 repair_binding.json；請從本程式開啟整合 GUI。
+Cz／MNI／BEAM-style／SGP 方法與限制見 target_tool\README.txt。
+
+啟動、設定與驗證
+雙擊 launch_hidden.vbs / Start_Cz_Tool.vbs，不顯示 CMD；start_cz_tool.bat 供排錯。
+啟動日誌 %TEMP%\SimNIBS_HeadBuilder_startup.log；補頂日誌 %LOCALAPPDATA%\SimNIBS_ScalpRepair\last_run.log。
+語言可切換繁體中文／English，第三方程序日誌保留原文。
+ZIP 不含 SimNIBS、dcm2niix、模型權重或個案影像；不需另裝一般 Python。
+自動測試與較大表面的接縫壓力測試詳見 VALIDATION.json。
+未在此環境執行 Windows 原生 OpenGL、實際完整 CHARM／電場求解，或此個案原始 m2m 與補頂檔的臨床驗證。
+
+v1.80.2：已用 參考個案 原始 FEM 與 reviewed 補頂表面測試
+原始 tag 1005 頭皮有 6 個邊界度數為 4 的頂點，距最終切面約 108–130 mm；並非新接縫造成。
+本版允許完整保留距切面至少 10 mm 的既有原始邊界接觸，但逐一驗證頂點、相鄰所有三角面、
+全部原始開口邊均不變；不把這些點焊接、移動或補洞。新接縫與 donor 頭頂仍嚴格檢查。
+原始表面有非流形邊、重複面、退化面或分離元件時仍拒絕；異常點接近／超過切面也拒絕。
+原始 LPA/RPA 距既有邊界約 3 mm：只有在投影點落在原始表面且周圍 10 mm 所有三角面
+與原始模型一致時才允許沿用。新邊界、已改變的局部網格與 Cz 不適用此例外。
+因此本版不宣稱整張頭皮已成為無缺陷流形，而是驗證局部修補沒有改變既有下方邊界。
+個案測試：1,283 個新接縫三角面，0 個接縫開口、0 個接縫自交、0 個接縫非流形頂點；
+57,376 個完整原始下方三角面與 876 條原始邊界邊保留。
+儲存的 SimNIBS EEG 演算法以網格陣列介面執行，得到 91 個點位；尚未測試 Windows 安裝版 CLI。
+請載入原 manifest，切面留白、接縫 4 mm，選新的空白輸出資料夾再執行⑤。不需重跑 DICOM／配準／遮罩。
+自動切面使用原 T1 方向：本例選 h=126.7683566815 mm，不是水平 RAS Z，請勿直接填入手動 Z 欄位。
+錯誤診斷檔仍為 topology_diagnostics.json、topology_boundary_vertices.csv 及 hybrid_manifest.json。
+體積 FEM 保持原樣，模型切換與英文介面保留。
